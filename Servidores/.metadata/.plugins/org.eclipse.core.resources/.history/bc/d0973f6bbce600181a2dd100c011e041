@@ -55,8 +55,7 @@ public class Coordinador {
 				exec.execute(new Delegado3(sc, idThread));
 				idThread++;
 				//d3.start();
-				System.out.println(getSystemCpuLoad()); //Cada vez que se acepta una nueva conexión, se imprime
-														//el porcentaje de uso de la CPU
+				System.out.println(getSystemCpuLoad());
 			} catch (IOException e) {
 				System.out.println(MAESTRO + "Error creando el socket cliente.");
 				e.printStackTrace();

@@ -55,8 +55,6 @@ public class Coordinador {
 				exec.execute(new Delegado3(sc, idThread));
 				idThread++;
 				//d3.start();
-				System.out.println(getSystemCpuLoad()); //Cada vez que se acepta una nueva conexión, se imprime
-														//el porcentaje de uso de la CPU
 			} catch (IOException e) {
 				System.out.println(MAESTRO + "Error creando el socket cliente.");
 				e.printStackTrace();
@@ -64,22 +62,9 @@ public class Coordinador {
 		}
 	}
 	
-	public static double getSystemCpuLoad() throws Exception{
+	public double getSystemCpuLoad() throws Exception{
 		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-		ObjectName name = ObjectName.getInstance("java.lang:type=OperatingSystem");
-		AttributeList list = mbs.getAttributes(name,  new String[]{"SystemCpuLoad"});
-		
-		if(list.isEmpty())
-			return Double.NaN;
-		
-		Attribute att = (Attribute) list.get(0);
-		Double value = (Double)att.getValue();
-		
-		//Usually takes a couple of seconds before we get real values
-		if(value == -1.0)
-			return Double.NaN;
-		//Returns a percentage value with 1 decimal point precision
-		return ((int)(value*1000)/10.0);
+		ObjectName name = ObjectName.getInstanve("java.lang:type=OperatingSystem");
 	}
 	
 
